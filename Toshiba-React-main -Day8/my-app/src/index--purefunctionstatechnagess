@@ -1,0 +1,72 @@
+//pure function demo:
+
+//pure or not : This is impure function
+// function updateProfile(profile, city) {
+//     profile.city = city;
+//     return profile;
+// }
+
+// //pure function: return new Object every time , with new state 
+
+// function updateProfile(profile, city) {
+//     //return new Object
+//     return {
+//         id: profile.id,
+//         name: profile.name,
+//         city: city
+//     };
+// }
+
+//pure function : short cut apis
+//pure function: return new Object every time , with new state 
+
+// function updateProfile(profile, city) {
+//     //return new Object
+//   return Object.assign({}, profile, { city: city,key: { key1:someprop} })
+// }
+
+//pure function : using spread operator
+
+function updateProfile(profile, city) {
+    //return new Object
+    return { ...profile, city };
+}
+
+//is it pure : Impure; because push method is not pure
+// function add(todos, todo) {
+//     return todos.push(todo)
+// }
+// function add(todos, todo) {
+//     return todos.concat(todo)
+// }
+//using spread operator :pure function
+function add(todos, todo) {
+    return [...todos, todo];
+}
+
+
+//why we are using map in the react 
+//props.users.map()  ----> map is pure function.
+
+//initial state  / original state/ base State
+let profile = {
+    id: 1,
+    name: 'Subramanian',
+    city: 'Chennai'
+}
+
+Object.freeze(profile);
+
+console.log(updateProfile(profile, 'Coimbatore'));
+
+console.log(updateProfile(profile, 'Banaglore'));
+
+console.log(updateProfile(profile, 'Delhi'));
+
+let todos = [{
+    title: 'Learn react',
+    done: true
+}];
+
+Object.freeze(todos);
+console.log(add(todos, { title: 'Learn Microservices', done: false }));
